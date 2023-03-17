@@ -5,15 +5,15 @@ import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import ru.yandex.praktikum.TestBase;
 import ru.yandex.praktikum.api.User;
 
 import static org.junit.Assert.assertTrue;
-import static ru.yandex.praktikum.LoginPage.*;
+import static ru.yandex.praktikum.LoginPage.openLogin;
 import static ru.yandex.praktikum.MainPage.orderCreateButton;
 import static ru.yandex.praktikum.MainPage.personalAccountButton;
 import static ru.yandex.praktikum.PersonalAccountPage.*;
-import static ru.yandex.praktikum.RegistationPage.fillRegistrationPageFields;
 
 public class PersonalAccountPageTests extends TestBase {
 
@@ -21,10 +21,10 @@ public class PersonalAccountPageTests extends TestBase {
 
     @Before
     public void setUp() {
-        registationPage.openRegistration(webDriver);
-        fillRegistrationPageFields(webDriver, userCorrectData);
+        ru.yandex.praktikum.RegistationPage.openRegistration(webDriver);
+        registationPage.fillRegistrationPageFields(webDriver, userCorrectData);
         openLogin(webDriver);
-        fieldsLoginPageFilling(webDriver, userCorrectData);
+        enterPage.fieldsLoginPageFilling(webDriver, userCorrectData);
     }
 
     @After
@@ -73,6 +73,6 @@ public class PersonalAccountPageTests extends TestBase {
         webDriver.findElement(personalAccountButton).click();
         webDriver.findElement(exitButton).click();
 
-        assertTrue("Что-то пошло не так", webDriver.findElement(loginButton).isDisplayed());
+        assertTrue("Что-то пошло не так", webDriver.findElement(enterPage.loginButton).isDisplayed());
     }
 }

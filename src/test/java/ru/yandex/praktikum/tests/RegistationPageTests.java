@@ -11,7 +11,6 @@ import ru.yandex.praktikum.api.User;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static ru.yandex.praktikum.LoginPage.*;
 import static ru.yandex.praktikum.RegistationPage.*;
 
 public class RegistationPageTests extends TestBase {
@@ -33,20 +32,19 @@ public class RegistationPageTests extends TestBase {
     @DisplayName("Регистрация пользователя с корректными данными")
     @Description("Попытка регистрации с валидными данными")
     public void userRegistrationWithCorrectDataTest() {
-        registationPage.openRegistration(webDriver);
-        RegistationPage.fillRegistrationPageFields(webDriver, userCorrectData);
+        openRegistration(webDriver);
+        registationPage.fillRegistrationPageFields(webDriver, userCorrectData);
 
-        assertTrue("Вероятно юзер уже существует", webDriver.findElements(userAlreadyExist).size() == 0);
-        assertThat("\"Вероятно юзер уже существует\"", webDriver.findElement(successRegistered).getText(), equalTo(successRegisteredExpected));
+        assertThat("\"Вероятно юзер уже существует\"", webDriver.findElement(registationPage.successRegistered).getText(), equalTo(registationPage.successRegisteredExpected));
     }
 
     @Test
     @DisplayName("Регистрация пользователя с некорректными данными")
     @Description("Попытка регистрации с паролем меньше 6 символов")
     public void userRegistrationWithIncorrectDataTest() {
-        registationPage.openRegistration(webDriver);
-        RegistationPage.fillRegistrationPageFieldsNegative(webDriver, userIncorrectData);
+        openRegistration(webDriver);
+        registationPage.fillRegistrationPageFieldsNegative(webDriver, userIncorrectData);
 
-        assertTrue(webDriver.findElement(notCorrectPassword).isDisplayed());
+        assertTrue(webDriver.findElement(registationPage.notCorrectPassword).isDisplayed());
     }
 }

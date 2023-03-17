@@ -17,14 +17,6 @@ public class TestBase {
     protected final UserClient userClient = new UserClient();
     protected final Gson gson = new Gson();
 
-    public void setUpBrowser(String browserName) {
-        if (browserName == "chrome") {
-            setUpChrome();
-        } else if (browserName == "yandex") {
-            setUpYandex();
-        }
-    }
-
     public static void setUpChrome() {
         WebDriverManager.chromedriver().setup();
         webDriver = new ChromeDriver();
@@ -35,6 +27,14 @@ public class TestBase {
         System.setProperty("webdriver.chrome.driver", "/Users/artembragin/Documents/yandexdriver");
         webDriver = new ChromeDriver();
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
+
+    public void setUpBrowser(String browserName) {
+        if (browserName == "chrome") {
+            setUpChrome();
+        } else if (browserName == "yandex") {
+            setUpYandex();
+        }
     }
 
     @Before

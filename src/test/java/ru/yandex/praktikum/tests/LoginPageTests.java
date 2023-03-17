@@ -10,9 +10,8 @@ import ru.yandex.praktikum.TestBase;
 import ru.yandex.praktikum.api.User;
 
 import static org.junit.Assert.assertTrue;
-import static ru.yandex.praktikum.ForgotPasswordPage.*;
+import static ru.yandex.praktikum.ForgotPasswordPage.loginForgotPasswordPageButton;
 import static ru.yandex.praktikum.ForgotPasswordPage.openForgotPassword;
-import static ru.yandex.praktikum.LoginPage.fieldsLoginPageFilling;
 import static ru.yandex.praktikum.MainPage.*;
 import static ru.yandex.praktikum.RegistationPage.*;
 
@@ -22,7 +21,7 @@ public class LoginPageTests extends TestBase {
     @Before
     public void setUp() {
         registationPage.openRegistration(webDriver);
-        fillRegistrationPageFields(webDriver, userCorrectData);
+        registationPage.fillRegistrationPageFields(webDriver, userCorrectData);
     }
 
     @After
@@ -41,7 +40,7 @@ public class LoginPageTests extends TestBase {
     public void loginWithEnterToAccountButtonTest() {
         openMain(webDriver);
         webDriver.findElement(loginMainPageButton).click();
-        fieldsLoginPageFilling(webDriver, userCorrectData);
+        enterPage.fieldsLoginPageFilling(webDriver, userCorrectData);
 
         assertTrue("Что-то пошло не так", webDriver.findElement(orderCreateButton).isDisplayed());
     }
@@ -52,7 +51,7 @@ public class LoginPageTests extends TestBase {
     public void loginWithPersonalAccountOnMainPageTest() {
         openMain(webDriver);
         webDriver.findElement(personalAccountButton).click();
-        fieldsLoginPageFilling(webDriver, userCorrectData);
+        enterPage.fieldsLoginPageFilling(webDriver, userCorrectData);
 
         assertTrue("Что-то пошло не так", webDriver.findElement(orderCreateButton).isDisplayed());
     }
@@ -62,8 +61,8 @@ public class LoginPageTests extends TestBase {
     @Description("Логин по кнопке войти в аккаунт через форму регистрации")
     public void loginWithEnterButtonOnRegistrationFormTest() {
         openRegistration(webDriver);
-        webDriver.findElement(loginRegistrationPageButton).click();
-        fieldsLoginPageFilling(webDriver, userCorrectData);
+        webDriver.findElement(registationPage.loginRegistrationPageButton).click();
+        enterPage.fieldsLoginPageFilling(webDriver, userCorrectData);
 
         assertTrue("Что-то пошло не так", webDriver.findElement(orderCreateButton).isDisplayed());
     }
@@ -74,7 +73,7 @@ public class LoginPageTests extends TestBase {
     public void loginWithEnterButtonOnForgotFormTest() {
         openForgotPassword(webDriver);
         webDriver.findElement(loginForgotPasswordPageButton).click();
-        fieldsLoginPageFilling(webDriver, userCorrectData);
+        enterPage.fieldsLoginPageFilling(webDriver, userCorrectData);
 
         assertTrue("Что-то пошло не так", webDriver.findElement(orderCreateButton).isDisplayed());
     }
