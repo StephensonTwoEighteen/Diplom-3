@@ -10,10 +10,9 @@ import java.util.concurrent.TimeUnit;
 import static ru.yandex.praktikum.links.Links.REGISTERATION_PAGE;
 
 public class RegistationPage {
-    public By successRegistered = By.xpath(".//*[contains (text(), \"Вход\")]");
-    public By notCorrectPassword = By.xpath(".//*[contains (text(), \"Некорректный пароль\")]");
-    public String successRegisteredExpected = "Вход";
-    public By loginRegistrationPageButton = By.className("Auth_link__1fOlj");
+    private By successRegisteredCondition = By.xpath(".//*[contains (text(), \"Вход\")]");
+    private By notCorrectPassword = By.xpath(".//*[contains (text(), \"Некорректный пароль\")]");
+    private By loginRegistrationPageButton = By.className("Auth_link__1fOlj");
     private By firstNameField = By.xpath(".//fieldset[1]//input");
     private By emailField = By.xpath(".//fieldset[2]//input");
     private By passwordField = By.xpath(".//fieldset[3]//input");
@@ -40,5 +39,20 @@ public class RegistationPage {
         webDriver.findElement(emailField).sendKeys(user.getEmail());
         webDriver.findElement(passwordField).sendKeys(user.getPassword());
         webDriver.findElement(registrationButton).click();
+    }
+
+    @Step("Удачное состояние регистрации")
+    public boolean successRegistration(WebDriver webDriver) {
+        return webDriver.findElement(successRegisteredCondition).isDisplayed();
+    }
+
+    @Step("Отображение некорректного пароля")
+    public boolean notCorrectPasswordDispayed(WebDriver webDriver) {
+        return webDriver.findElement(notCorrectPassword).isDisplayed();
+    }
+
+    @Step("Клик на кнопку регистрации")
+    public void loginRegistrationPageButtonCLick(WebDriver webDriver) {
+        webDriver.findElement(loginRegistrationPageButton).click();
     }
 }

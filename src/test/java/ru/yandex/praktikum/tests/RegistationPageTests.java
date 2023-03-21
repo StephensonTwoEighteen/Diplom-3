@@ -4,12 +4,10 @@ import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Test;
-import ru.yandex.praktikum.RegistationPage;
 import ru.yandex.praktikum.TestBase;
 import ru.yandex.praktikum.api.User;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static ru.yandex.praktikum.RegistationPage.*;
 
@@ -35,7 +33,7 @@ public class RegistationPageTests extends TestBase {
         openRegistration(webDriver);
         registationPage.fillRegistrationPageFields(webDriver, userCorrectData);
 
-        assertThat("\"Вероятно юзер уже существует\"", webDriver.findElement(registationPage.successRegistered).getText(), equalTo(registationPage.successRegisteredExpected));
+        assertTrue("\"Вероятно юзер уже существует\"", registationPage.successRegistration(webDriver));
     }
 
     @Test
@@ -45,6 +43,6 @@ public class RegistationPageTests extends TestBase {
         openRegistration(webDriver);
         registationPage.fillRegistrationPageFieldsNegative(webDriver, userIncorrectData);
 
-        assertTrue(webDriver.findElement(registationPage.notCorrectPassword).isDisplayed());
+        assertTrue("Что-то пошло не так", registationPage.notCorrectPasswordDispayed(webDriver));
     }
 }

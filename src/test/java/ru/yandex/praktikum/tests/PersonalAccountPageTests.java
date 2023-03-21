@@ -5,15 +5,11 @@ import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import ru.yandex.praktikum.TestBase;
 import ru.yandex.praktikum.api.User;
 
 import static org.junit.Assert.assertTrue;
-import static ru.yandex.praktikum.LoginPage.openLogin;
-import static ru.yandex.praktikum.MainPage.orderCreateButton;
-import static ru.yandex.praktikum.MainPage.personalAccountButton;
-import static ru.yandex.praktikum.PersonalAccountPage.*;
+import static ru.yandex.praktikum.LoginPage.*;
 
 public class PersonalAccountPageTests extends TestBase {
 
@@ -41,38 +37,38 @@ public class PersonalAccountPageTests extends TestBase {
     @DisplayName("Открытие личного кабинета")
     @Description("Проверка открытия личного кабинета с главной страницы")
     public void personalAccountOpenByButtonTest() {
-        webDriver.findElement(personalAccountButton).click();
+        mainPage.personalAccountButtonCLick(webDriver);
 
-        assertTrue("Что-то пошло не так", webDriver.findElement(exitButton).isDisplayed());
+        assertTrue("Что-то пошло не так", personalAccountPage.exitButtonDisplayed(webDriver));
     }
 
     @Test
     @DisplayName("Переход по клику на конструктор")
     @Description("Проверка перехода на главную из ЛК по клику на кнопку конструктора")
     public void constructorButtonPressTest() {
-        webDriver.findElement(personalAccountButton).click();
-        webDriver.findElement(constructorButton).click();
+        mainPage.personalAccountButtonCLick(webDriver);
+        personalAccountPage.constructorButtonClick(webDriver);
 
-        assertTrue("Что-то пошло не так", webDriver.findElement(orderCreateButton).isDisplayed());
+        assertTrue("Что-то пошло не так", mainPage.orderCreateButtonDisplayed(webDriver));
     }
 
     @Test
     @DisplayName("Переход по клику на лого")
     @Description("Проверка перехода на главную из ЛК по клику на лого")
     public void logoButtonPressTest() {
-        webDriver.findElement(personalAccountButton).click();
-        webDriver.findElement(mainLogo).click();
+        mainPage.personalAccountButtonCLick(webDriver);
+        personalAccountPage.mainLogoClick(webDriver);
 
-        assertTrue("Что-то пошло не так", webDriver.findElement(orderCreateButton).isDisplayed());
+        assertTrue("Что-то пошло не так", mainPage.orderCreateButtonDisplayed(webDriver));
     }
 
     @Test
     @DisplayName("Переход на главную по клику на 'Выйти'")
     @Description("Проверка перехода на страницу логина из ЛК по клику на кнопку Выйти")
     public void exitButtonPressTest() {
-        webDriver.findElement(personalAccountButton).click();
-        webDriver.findElement(exitButton).click();
+        mainPage.personalAccountButtonCLick(webDriver);
+        personalAccountPage.exitButtonClick(webDriver);
 
-        assertTrue("Что-то пошло не так", webDriver.findElement(enterPage.loginButton).isDisplayed());
+        assertTrue("Что-то пошло не так", enterPage.loginButtonClick(webDriver));
     }
 }

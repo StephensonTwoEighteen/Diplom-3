@@ -22,33 +22,30 @@ public class MainPageTests extends TestBase {
     @DisplayName("Булки")
     @Description("Переход к разделу Булки")
     public void bunHeaderChooseTest() {
-        webDriver.findElement(fillingsButton).click();
-        webDriver.findElement(bunButton).click();
+        mainPage.fillingsButtonCLick(webDriver);
+        mainPage.bunButtonCLick(webDriver);
+        String bunHeaderText = mainPage.bunButtonGetText(webDriver);
 
-        String bunHeaderText = webDriver.findElement(bunButton).getText();
-
-        assertEquals("Что-то пошло не так", bunHeaderText, webDriver.findElement(choosedHeader).getText());
+        assertEquals("Что-то пошло не так", bunHeaderText, mainPage.choosedHeaderGetText(webDriver));
     }
 
     @Test
     @DisplayName("Соусы")
     @Description("Переход к разделу Соусы")
     public void saucesHeaderChooseTest() {
-        webDriver.findElement(saucesButton).click();
+        mainPage.saucesButtonCLick(webDriver);
+        String sauceHeaderText = mainPage.saucesButtonGetText(webDriver);
 
-        String sauceHeaderText = webDriver.findElement(saucesButton).getText();
-
-        assertEquals("Что-то пошло не так", sauceHeaderText, webDriver.findElement(choosedHeader).getText());
+        assertEquals("Что-то пошло не так", sauceHeaderText, mainPage.choosedHeaderGetText(webDriver));
     }
 
     @Test
     @DisplayName("Начинки")
     @Description("Переход к разделу Начинки")
     public void fillingsHeaderChooseTest() {
-        webDriver.findElement(fillingsButton).click();
+        mainPage.fillingsButtonCLick(webDriver);
+        String fillingsHeaderText = mainPage.fillingsButtonGetText(webDriver);
 
-        String fillingsHeaderText = webDriver.findElement(fillingsButton).getText();
-
-        assertEquals("Что-то пошло не так", fillingsHeaderText, webDriver.findElement(choosedHeader).getText());
+        assertEquals("Что-то пошло не так", fillingsHeaderText, mainPage.choosedHeaderGetText(webDriver));
     }
 }

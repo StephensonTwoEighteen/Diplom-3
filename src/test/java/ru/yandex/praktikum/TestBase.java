@@ -15,6 +15,9 @@ public class TestBase {
     protected final RegistationPage registationPage = new RegistationPage();
     protected final LoginPage enterPage = new LoginPage();
     protected final UserClient userClient = new UserClient();
+    protected final ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage();
+    protected final PersonalAccountPage personalAccountPage = new ru.yandex.praktikum.PersonalAccountPage();
+    protected final MainPage mainPage = new MainPage();
     protected final Gson gson = new Gson();
 
     public static void setUpChrome() {
